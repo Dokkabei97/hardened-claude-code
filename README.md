@@ -131,11 +131,17 @@ Pre-configured MCP server connections:
 
 ## Installation
 
-Install as a Claude Code plugin with a single command:
+### As a Plugin (recommended)
 
 ```bash
-claude plugin install github:Dokkabei97/hardened-claude-code
+# 1. Add marketplace (includes all Dokkabei97 plugins)
+/plugin marketplace add Dokkabei97/claude-plugins
+
+# 2. Install plugin
+/plugin install hardened-claude-code
 ```
+
+> You can also add the plugin repository directly: `/plugin marketplace add Dokkabei97/hardened-claude-code`
 
 That's it. All agents, commands, skills, hooks, and output styles are automatically available.
 
