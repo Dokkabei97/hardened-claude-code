@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "all-agents-mcp": {
+      "description": "Multi AI CLI Agent Orchestration — Codex, Gemini CLI, Copilot CLI를 하나의 인터페이스로 오케스트레이션합니다.",
+      "command": "npx",
+      "args": ["-y", "all-agents-mcp"],
+      "env": {
+        "AA_MCP_LOG_LEVEL": "warn"
+      }
+    }
+  }
+}
