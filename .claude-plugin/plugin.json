@@ -2,7 +2,10 @@
   "name": "hardened-claude-code",
   "version": "1.0.0",
   "description": "Production-hardened Claude Code configuration with safety hooks, multi-stack support, and Learning Plus output style",
-  "author": "Dokkabei97",
+  "author": {
+    "name": "Dokkabei97",
+    "url": "https://github.com/Dokkabei97"
+  },
   "license": "MIT",
   "homepage": "https://github.com/Dokkabei97/hardened-claude-code"
 }

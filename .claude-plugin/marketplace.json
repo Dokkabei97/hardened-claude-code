@@ -1,0 +1,23 @@
+{
+  "name": "hardened-claude-code",
+  "owner": {
+    "name": "Dokkabei97",
+    "email": "dokkabei97@gmail.com"
+  },
+  "metadata": {
+    "description": "Production-hardened Claude Code configuration with safety hooks, multi-stack support, and Learning Plus output style",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "hardened-claude-code",
+      "source": "./",
+      "description": "Production-hardened Claude Code with safety hooks, multi-stack agents, and 9 commands/7 skills",
+      "version": "1.0.0",
+      "category": "development",
+      "keywords": ["hooks", "safety", "agents", "skills", "commands", "multi-stack", "kotlin", "typescript", "python"],
+      "license": "MIT",
+      "homepage": "https://github.com/Dokkabei97/hardened-claude-code"
+    }
+  ]
+}
