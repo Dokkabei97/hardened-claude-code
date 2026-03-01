@@ -37,11 +37,11 @@ hardened-claude-code/
 │   └── plugin.json
 ├── agents/              # 4 specialized review agents
 ├── commands/            # 9 slash commands for common workflows
-├── skills/              # 7 knowledge-based skill modules
+├── skills/              # 8 knowledge-based skill modules
 ├── hooks/               # Pre/Post tool hooks for safety and quality
 ├── scripts/             # Hook support scripts (dangerous command blocker)
 ├── output-styles/       # Learning Plus - educational output style
-└── mcp/                 # MCP server configs (Context7, Playwright, Serena)
+└── mcp/                 # MCP server configs (Context7, Playwright, Serena, All Agents)
 ```
 
 ### Agents
@@ -83,6 +83,7 @@ Knowledge modules that activate contextually.
 | `flow-scaffolding` | Templates for creating new plugin components |
 | `flow-validation` | Validation rules for component quality checks |
 | `sync-claude-md` | Auto-detect when CLAUDE.md needs updating after code changes |
+| `claude-md-inverted-index` | Inverted index strategy for CLAUDE.md — reduces AI agent tool calls by 42-68% |
 | `obsidian-tech-note` | Obsidian note templates (concept, lab, comparison, troubleshoot, pattern, TIL, MOC) |
 
 ### Hooks
@@ -136,6 +137,7 @@ Pre-configured MCP server connections:
 | Context7 | Up-to-date library documentation and code examples |
 | Playwright | Browser automation for E2E testing |
 | Serena | Semantic code analysis with LSP-powered symbol navigation |
+| All Agents MCP | Multi AI CLI orchestration — Codex, Gemini CLI, Copilot CLI in one interface |
 
 ---
 
