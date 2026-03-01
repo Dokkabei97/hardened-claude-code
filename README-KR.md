@@ -39,6 +39,7 @@ hardened-claude-code/
 ├── commands/            # 9개 슬래시 커맨드
 ├── skills/              # 7개 지식 기반 스킬 모듈
 ├── hooks/               # Pre/Post 도구 훅 (안전성 + 품질)
+├── scripts/             # 훅 지원 스크립트 (위험 명령어 차단기)
 ├── output-styles/       # Learning Plus - 교육형 출력 스타일
 └── mcp/                 # MCP 서버 설정 (Context7, Playwright, Serena)
 ```
@@ -89,6 +90,15 @@ hardened-claude-code/
 진짜 하드닝은 훅 시스템에서 이루어집니다. 모든 도구 사용 시 자동으로 실행됩니다.
 
 **PreToolUse:**
+- **위험 명령어 차단기** - 4단계 보안 시스템으로 위험한 Bash 명령을 차단하거나 승인을 요청:
+
+  | 레벨 | 동작 | 예시 |
+  |------|------|------|
+  | L1 치명적 | 차단 (deny) | `rm -rf /`, fork bomb, `mkfs`, `shutdown` |
+  | L2 핵심 경로 | 차단 (deny) | `rm .git/`, `rm .env`, `package.json` 수정 |
+  | L3 위험 | 사용자 승인 | `git push --force`, `git reset --hard`, `sudo`, `curl \| sh` |
+  | L4 의심 | 사용자 승인 | `rm *.log`, `find -delete`, `kill -9` |
+
 - tmux 외부에서 dev 서버 실행 차단 (고아 프로세스 방지)
 - 장시간 명령어에 대한 tmux 사용 리마인더
 - `git push` 전 리뷰 리마인더
@@ -220,7 +230,7 @@ claude /verify-flow
 
 ### 가이드라인
 
-- **훅은 반드시 인라인** - `node -e "..."` 명령어만 사용. 외부 스크립트 참조 불가.
+- **훅은 가능하면 인라인** - 간단한 훅은 `node -e "..."` 사용. 복잡한 훅(위험 명령어 차단기 등)은 `scripts/`의 외부 스크립트 사용 가능.
 - **멀티 스택 지원** - 새 에이전트, 커맨드, 훅은 가능한 Kotlin, TypeScript, Python을 모두 지원.
 - **제출 전 테스트** - `claude --plugin-dir .`로 변경사항이 올바르게 동작하는지 확인.
 - **하나의 역할에 집중** - 각 컴포넌트는 하나의 일을 잘 수행해야 합니다. 관련 없는 기능 결합 지양.

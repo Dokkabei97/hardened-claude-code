@@ -39,6 +39,7 @@ hardened-claude-code/
 ├── commands/            # 9 slash commands for common workflows
 ├── skills/              # 7 knowledge-based skill modules
 ├── hooks/               # Pre/Post tool hooks for safety and quality
+├── scripts/             # Hook support scripts (dangerous command blocker)
 ├── output-styles/       # Learning Plus - educational output style
 └── mcp/                 # MCP server configs (Context7, Playwright, Serena)
 ```
@@ -89,6 +90,15 @@ Knowledge modules that activate contextually.
 The hooks system is where the real hardening happens. These run automatically on every tool use.
 
 **PreToolUse:**
+- **Dangerous command blocker** - 4-level security system that blocks or prompts for approval on risky Bash commands:
+
+  | Level | Action | Examples |
+  |-------|--------|----------|
+  | L1 Catastrophic | Block (deny) | `rm -rf /`, fork bomb, `mkfs`, `shutdown` |
+  | L2 Critical Path | Block (deny) | `rm .git/`, `rm .env`, modify `package.json` |
+  | L3 Dangerous | Ask user | `git push --force`, `git reset --hard`, `sudo`, `curl \| sh` |
+  | L4 Suspicious | Ask user | `rm *.log`, `find -delete`, `kill -9` |
+
 - Block dev servers outside tmux (prevents orphaned processes)
 - Remind about tmux for long-running commands
 - Review reminder before `git push`
@@ -220,7 +230,7 @@ claude /verify-flow
 
 ### Guidelines
 
-- **Hooks must be inline** - Use `node -e "..."` commands only. No external script references.
+- **Hooks should be inline when possible** - Use `node -e "..."` for simple hooks. Complex hooks (like the dangerous command blocker) may use external scripts in `scripts/`.
 - **Multi-stack support** - New agents, commands, and hooks should support Kotlin, TypeScript, and Python where applicable.
 - **Test before submitting** - Run `claude --plugin-dir .` to verify your changes work correctly.
 - **Keep it focused** - Each component should do one thing well. Avoid combining unrelated functionality.
