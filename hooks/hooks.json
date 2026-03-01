@@ -14,6 +14,17 @@
     ],
     "PreToolUse": [
       {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ${CLAUDE_PLUGIN_ROOT}/scripts/dangerous-command-blocker.js",
+            "timeout": 5000
+          }
+        ],
+        "description": "Block dangerous Bash commands with 4-level security (catastrophic/critical/dangerous/suspicious)"
+      },
+      {
         "matcher": "tool == \"Bash\" && tool_input.command matches \"(npm run dev|pnpm( run)? dev|yarn dev|bun run dev|uvicorn|flask run|python.*manage\\\\.py runserver|uv run.*(uvicorn|flask|manage\\\\.py))\"",
         "hooks": [
           {
