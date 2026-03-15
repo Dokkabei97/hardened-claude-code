@@ -35,13 +35,14 @@ The result is something opinionated and battle-tested, not a generic starter kit
 hardened-claude-code/
 ├── .claude-plugin/      # Plugin manifest
 │   └── plugin.json
+├── .mcp.json            # MCP server config (Playwright)
+├── .lsp.json            # LSP server config (TypeScript, Kotlin, Java, Python, Go)
 ├── agents/              # 4 specialized review agents
 ├── commands/            # 9 slash commands for common workflows
-├── skills/              # 8 knowledge-based skill modules
+├── skills/              # 11 knowledge-based skill modules
 ├── hooks/               # Pre/Post tool hooks for safety and quality
 ├── scripts/             # Hook support scripts (dangerous command blocker)
-├── output-styles/       # Learning Plus - educational output style
-└── mcp/                 # MCP server configs (Context7, Playwright, Serena, All Agents)
+└── output-styles/       # Learning Plus - educational output style
 ```
 
 ### Agents
@@ -85,6 +86,9 @@ Knowledge modules that activate contextually.
 | `sync-claude-md` | Auto-detect when CLAUDE.md needs updating after code changes |
 | `claude-md-inverted-index` | Inverted index strategy for CLAUDE.md — reduces AI agent tool calls by 42-68% |
 | `obsidian-tech-note` | Obsidian note templates (concept, lab, comparison, troubleshoot, pattern, TIL, MOC) |
+| `document` | Structured document generation with auto-detected templates (plans, reports, analysis) |
+| `web-fetch` | Web page content fetching via Gemini CLI fallback when native WebFetch fails |
+| `with` | External AI CLI agent orchestration (Codex, Gemini, Copilot) with complexity-based routing |
 
 ### Hooks
 
@@ -130,14 +134,25 @@ The "Build Together" format provides context, points you to the exact location, 
 
 ### MCP Servers
 
-Pre-configured MCP server connections:
+Pre-configured MCP server connections via `.mcp.json`:
 
 | Server | Purpose |
 |--------|---------|
-| Context7 | Up-to-date library documentation and code examples |
 | Playwright | Browser automation for E2E testing |
-| Serena | Semantic code analysis with LSP-powered symbol navigation |
-| All Agents MCP | Multi AI CLI orchestration — Codex, Gemini CLI, Copilot CLI in one interface |
+
+> **Note:** Context7 and Serena are recommended as separate plugins. The All Agents MCP functionality has been replaced by the `with` skill for AI CLI orchestration.
+
+### LSP Servers
+
+Pre-configured LSP server connections via `.lsp.json` for enhanced code intelligence:
+
+| Language | Server |
+|----------|--------|
+| TypeScript/JavaScript | `typescript-language-server` |
+| Kotlin | `kotlin-language-server` |
+| Java | `jdtls` |
+| Python | `pyright-langserver` |
+| Go | `gopls` |
 
 ---
 
@@ -228,7 +243,8 @@ claude /verify-flow
 | `skills/` | Contextual knowledge modules (`SKILL.md` + reference files) |
 | `hooks/` | Pre/Post tool use hooks (`hooks.json` - inline only) |
 | `output-styles/` | Output style definitions (`.md`) |
-| `mcp/` | MCP server configurations (`.json`) |
+| `.mcp.json` | MCP server configurations (root level) |
+| `.lsp.json` | LSP server configurations (root level) |
 
 ### Guidelines
 
